@@ -1,5 +1,6 @@
 package com.example.retrofit_4.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,20 +28,22 @@ import org.jetbrains.annotations.Async
 import java.util.Locale
 
 @Composable
-fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier, onClick: () -> Unit){
+fun PokemonCard(pokemon: Pokemon, onPokemonSelected: (String) -> Unit, modifier: Modifier = Modifier){
     Card(
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f)
-            .padding(10.dp),
-        onClick = onClick,
+            .padding(10.dp)
+            .clickable {
+                onPokemonSelected(pokemon.name)
+            },
         elevation = CardDefaults.cardElevation(10.dp),
         colors = CardDefaults.cardColors(Color.White)
         ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            AsyncImage(model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${extractNumberFromUrl(pokemon.url)}.png",
+            AsyncImage(model = pokemon.imgLink,
                 contentDescription = pokemon.name,
                 placeholder = painterResource(id = R.drawable.loading_img),
                 error = painterResource(id = R.drawable.ic_broken_image),
@@ -55,18 +58,4 @@ fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier, onClick: () -> 
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun PokemonCardPreview(){
-    PokemonCard(
-        pokemon = Pokemon("Bulbasaur",""), onClick = {}
-    )
-}
-
-fun extractNumberFromUrl(url: String): Int? {
-    val regex = """/(\d+)/$""".toRegex()
-    val matchResult = regex.find(url)
-    return matchResult?.groups?.get(1)?.value?.toInt()
 }

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Retrofit_4</string>
+    <string name="retry">Retry</string>
+    <string name="loading">Loading</string>
+    <string name="loading_failed">Failed to load</string>
+    <string name="HP">HP</string>
+    <string name="ATTACK">ATK</string>
+    <string name="DEFENSE">DEF</string>
+    <string name="SPECIAL_ATTACK">SPCA</string>
+    <string name="SPECIAL_DEFENSE">SPCD</string>
+    <string name="SPEED">SPD</string>
 </resources>

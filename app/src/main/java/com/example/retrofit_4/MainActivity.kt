@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.retrofit_4.navigation.PokemonScreen
 import com.example.retrofit_4.ui.components.PokemonGrid
 import com.example.retrofit_4.ui.screens.home.HomeScreen
 import com.example.retrofit_4.ui.screens.home.HomeUiState
@@ -22,11 +24,12 @@ import com.example.retrofit_4.ui.theme.Retrofit_4Theme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             Retrofit_4Theme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    HomeScreen()
+                    PokemonScreen()
                 }
             }
         }

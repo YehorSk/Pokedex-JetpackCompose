@@ -14,15 +14,38 @@ data class PokemonResponse(
 data class Pokemon(
     val name: String,
     val url: String
-)
+){
+    val id: Int
+        get() {
+            val regex = """/(\d+)/$""".toRegex()
+            return regex.find(url)?.groupValues?.get(1)?.toInt() ?: 0
+        }
+    val imgLink: String
+        get(){
+            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${extractNumberFromUrl(url)}.png"
+        }
+}
+
+fun extractNumberFromUrl(url: String): Int? {
+    val regex = """/(\d+)/$""".toRegex()
+    val matchResult = regex.find(url)
+    return matchResult?.groups?.get(1)?.value?.toInt()
+}
 
 @Serializable
 data class PokemonStats(
     val abilities: List<abilities>,
     val height: Int,
     val weight: Int,
+    val id: Int,
+    val name: String,
     val stats: List<Stats>
-)
+){
+    val imgLink: String
+        get(){
+            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"
+        }
+}
 
 @Serializable
 data class abilities(

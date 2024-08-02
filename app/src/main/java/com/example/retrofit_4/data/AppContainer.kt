@@ -16,9 +16,13 @@ class DefaultAppContainer : AppContainer{
 
     private val baseUrl = "https://pokeapi.co/api/v2/"
 
+    private val json = Json {
+        ignoreUnknownKeys = true
+    }
+
     private val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
-        .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
 
     val retrofitService : PokemonApiService by lazy {
