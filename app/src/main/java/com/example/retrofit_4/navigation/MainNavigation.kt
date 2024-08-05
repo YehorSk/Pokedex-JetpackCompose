@@ -52,7 +52,7 @@ fun PokemonScreen(modifier: Modifier = Modifier){
             )
         }
         composable(route = PokemonScreen.Details.name){
-            DetailsScreen(viewModel = detailsViewModel,detailsUiState = detailsUiState)
+            DetailsScreen(viewModel = detailsViewModel,detailsUiState = detailsUiState, navigateUp = {navController.navigateUp()})
         }
 
     }
